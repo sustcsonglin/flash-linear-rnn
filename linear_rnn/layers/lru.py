@@ -1,7 +1,9 @@
+import numpy as np
 import torch
 import torch.nn as nn
-import numpy as np
-from scan.sequential_scan.complex_rnn import complex_rnn_sequential_scan
+from linear_rnn.scan_triton import complex_scan
+
+
 
 class LRULayer(nn.Module):
 
@@ -55,7 +57,7 @@ class LRULayer(nn.Module):
         f_real = f_real[None, None, :].expand_as(input_real)
         f_imag = f_imag[None, None, :].expand_as(input_real)
     
-        output_real, output_imag = complex_rnn_sequential_scan(
+        output_real, output_imag = complex_rnn_scan(
             input_real.contiguous(), input_imag.contiguous(),
             f_real.contiguous(), f_imag.contiguous()
         )

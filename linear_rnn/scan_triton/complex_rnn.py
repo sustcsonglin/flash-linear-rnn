@@ -1,8 +1,9 @@
-import triton
-import triton.language as tl
 import torch
 import torch.nn.functional as F
+import triton
+import triton.language as tl
 from torch.autograd import Function
+
 
 @triton.jit
 def fwd_sequential_scan_complex(
@@ -172,5 +173,6 @@ class TritonSequentialScan_Complex(Function):
         return v_real, v_imag, f_real, f_imag
 
 
-complex_rnn_sequential_scan = TritonSequentialScan_Complex.apply
+complex_scan = TritonSequentialScan_Complex.apply
+
 
