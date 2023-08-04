@@ -57,7 +57,7 @@ class LRULayer(nn.Module):
         f_real = f_real[None, None, :].expand_as(input_real)
         f_imag = f_imag[None, None, :].expand_as(input_real)
     
-        output_real, output_imag = complex_rnn_scan(
+        output_real, output_imag = complex_scan(
             input_real.contiguous(), input_imag.contiguous(),
             f_real.contiguous(), f_imag.contiguous()
         )
